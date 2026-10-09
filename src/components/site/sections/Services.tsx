@@ -66,9 +66,7 @@ export function Services() {
           <span className="srv-ic">
             <MonitorSmartphone size={20} strokeWidth={1.8} />
           </span>
-          <h3 className="srv-name">
-            Seu negócio merece uma presença digital à altura.
-          </h3>
+          <h3 className="srv-name">Seu negócio merece uma presença digital à altura.</h3>
           <p className="srv-desc">
             Vamos entender juntos qual é a melhor solução para a sua empresa.
           </p>

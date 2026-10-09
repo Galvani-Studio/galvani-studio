@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { LegalDoc, type DocSection } from "@/components/site/LegalDoc";
 
 const SECTIONS: DocSection[] = [
@@ -201,24 +200,7 @@ const SECTIONS: DocSection[] = [
   },
 ];
 
-export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Termos de Uso — Galvani Studio" },
-      {
-        name: "description",
-        content:
-          "Termos de Uso da Galvani Studio — condições de uso do site e dos serviços oferecidos.",
-      },
-      { property: "og:title", content: "Termos de Uso — Galvani Studio" },
-      { property: "og:url", content: "/terms" },
-    ],
-    links: [{ rel: "canonical", href: "/terms" }],
-  }),
-  component: Terms,
-});
-
-function Terms() {
+export default function Terms() {
   return (
     <LegalDoc
       title="Termos de Uso"

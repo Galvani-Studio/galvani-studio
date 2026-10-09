@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.png";
+const logo = "/images/logo.png";
 
 export function BrandLogo({ small = false }: { small?: boolean }) {
   return (

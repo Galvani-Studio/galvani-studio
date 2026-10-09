@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import appMobile from "@/assets/app-mobile.png";
+const appMobile = "/images/app-mobile.png";
 
 export function Hero() {
   return (
@@ -14,8 +14,8 @@ export function Hero() {
           merece.
         </h1>
         <p className="hero-sub fade-up d2">
-          Desenvolvemos soluções digitais que fortalecem marcas, geram confiança e conectam
-          empresas a pessoas.
+          Desenvolvemos soluções digitais que fortalecem marcas, geram confiança e conectam empresas
+          a pessoas.
         </p>
         <div className="hero-btns fade-up d3">
           <a href="#contact" className="btn btn-primary">

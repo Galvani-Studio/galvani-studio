@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 
@@ -119,10 +121,10 @@ export function LegalDoc({
   return (
     <div className="doc">
       <nav className="doc-nav">
-        <Link to="/" className="nav-logo" aria-label="Galvani Studio — início">
+        <Link href="/" className="nav-logo" aria-label="Galvani Studio — início">
           <BrandLogo small />
         </Link>
-        <Link to="/" className="doc-back">
+        <Link href="/" className="doc-back">
           <ArrowLeft size={14} strokeWidth={2} />
           Voltar ao site
         </Link>
@@ -162,9 +164,9 @@ export function LegalDoc({
           <footer className="doc-footer">
             <p>© {new Date().getFullYear()} Galvani Studio. Todos os direitos reservados.</p>
             <div className="doc-footer-links">
-              <Link to="/privacy">Privacidade</Link>
-              <Link to="/cookies">Cookies</Link>
-              <Link to="/terms">Termos</Link>
+              <Link href="/privacy">Privacidade</Link>
+              <Link href="/cookies">Cookies</Link>
+              <Link href="/terms">Termos</Link>
             </div>
           </footer>
         </div>

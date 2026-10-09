@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { LegalDoc, type DocSection } from "@/components/site/LegalDoc";
 
 const SECTIONS: DocSection[] = [
@@ -166,33 +165,13 @@ const SECTIONS: DocSection[] = [
       { type: "p", text: "Dúvidas sobre nossa Política de Cookies? Entre em contato:" },
       {
         type: "contact",
-        lines: [
-          "Galvani Studio — Encarregado de Dados (DPO)",
-          "E-mail: galvanistudio1@gmail.com",
-        ],
+        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: galvanistudio1@gmail.com"],
       },
     ],
   },
 ];
 
-export const Route = createFileRoute("/cookies")({
-  head: () => ({
-    meta: [
-      { title: "Política de Cookies — Galvani Studio" },
-      {
-        name: "description",
-        content:
-          "Política de Cookies da Galvani Studio — o que são cookies, quais utilizamos e como gerenciar suas preferências.",
-      },
-      { property: "og:title", content: "Política de Cookies — Galvani Studio" },
-      { property: "og:url", content: "/cookies" },
-    ],
-    links: [{ rel: "canonical", href: "/cookies" }],
-  }),
-  component: Cookies,
-});
-
-function Cookies() {
+export default function Cookies() {
   return (
     <LegalDoc
       title="Política de Cookies"

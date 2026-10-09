@@ -36,3 +36,7 @@ dist-ssr
 .next/
 node_modules/
 bun.lock
+
+.env*
+!.env.example
+*.tsbuildinfo

@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { LegalDoc, type DocSection } from "@/components/site/LegalDoc";
 
 const SECTIONS: DocSection[] = [
@@ -239,10 +238,7 @@ const SECTIONS: DocSection[] = [
       },
       {
         type: "contact",
-        lines: [
-          "Galvani Studio — Encarregado de Dados (DPO)",
-          "E-mail: galvanistudio1@gmail.com",
-        ],
+        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: galvanistudio1@gmail.com"],
       },
       {
         type: "p",
@@ -252,24 +248,7 @@ const SECTIONS: DocSection[] = [
   },
 ];
 
-export const Route = createFileRoute("/privacy")({
-  head: () => ({
-    meta: [
-      { title: "Política de Privacidade — Galvani Studio" },
-      {
-        name: "description",
-        content:
-          "Política de Privacidade da Galvani Studio — como coletamos, utilizamos e protegemos seus dados pessoais, em conformidade com a LGPD.",
-      },
-      { property: "og:title", content: "Política de Privacidade — Galvani Studio" },
-      { property: "og:url", content: "/privacy" },
-    ],
-    links: [{ rel: "canonical", href: "/privacy" }],
-  }),
-  component: Privacy,
-});
-
-function Privacy() {
+export default function Privacy() {
   return (
     <LegalDoc
       title="Política de Privacidade"

@@ -1,158 +1,176 @@
-import { useState, type FormEvent } from "react";
-import { ArrowRight, Check } from "lucide-react";
-
-const EMAIL = "galvanistudio1@gmail.com";
-
-const SERVICES = [
-  "Site Institucional",
-  "Landing Page",
-  "Redesign de Site",
-  "Otimização de Performance",
-  "Manutenção e Evolução",
-  "Sistema Web / Software",
-  "Outro",
-];
-
+"use client";
+import { useRef, useState, type FormEvent } from "react";
+import { ArrowRight, Check, AlertCircle } from "lucide-react";
+import { quoteSchema, SERVICES } from "@/lib/quote";
 const EMPTY = { name: "", company: "", email: "", phone: "", service: "", message: "" };
-
+type Field = keyof typeof EMPTY;
 export function QuoteForm() {
   const [form, setForm] = useState(EMPTY);
-  const [sent, setSent] = useState(false);
-
-  const update =
-    (key: keyof typeof EMPTY) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
-      setForm((f) => ({ ...f, [key]: e.target.value }));
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    // No backend yet: compose a pre-filled e-mail with the request.
-    // Structure ready for a future API/CRM integration.
-    const subject = `Solicitação de orçamento — ${form.name || "novo contato"}`;
-    const body = [
-      `Nome: ${form.name}`,
-      form.company && `Empresa: ${form.company}`,
-      `Email: ${form.email}`,
-      form.phone && `Telefone: ${form.phone}`,
-      form.service && `Serviço de interesse: ${form.service}`,
-      "",
-      form.message,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+  const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
+  const submitting = useRef(false);
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (submitting.current) return;
+    const result = quoteSchema.safeParse(form);
+    if (!result.success) {
+      const fields: Partial<Record<Field, string>> = {};
+      for (const issue of result.error.issues) fields[issue.path[0] as Field] ??= issue.message;
+      setErrors(fields);
+      setStatus("error");
+      setFeedback("Revise os campos indicados antes de enviar.");
+      document.getElementById(`f-${Object.keys(fields)[0]}`)?.focus();
+      return;
+    }
+    setErrors({});
+    submitting.current = true;
+    setStatus("sending");
+    setFeedback("");
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.data),
+        signal: AbortSignal.timeout(15000),
+      });
+      const data = await response.json();
+      if (!response.ok || data.ok !== true)
+        throw new Error(data.error || "Não foi possível enviar. Tente novamente.");
+      setStatus("success");
+      setFeedback(
+        "Solicitação enviada com sucesso. Nossa equipe entrará em contato pelo email informado.",
+      );
+      setForm(EMPTY);
+    } catch (error) {
+      setStatus("error");
+      setFeedback(
+        error instanceof Error && error.name !== "TimeoutError"
+          ? error.message
+          : "O envio demorou mais que o esperado. Tente novamente em instantes.",
+      );
+    } finally {
+      submitting.current = false;
+    }
   };
-
+  const props = (key: Field) => ({
+    id: `f-${key}`,
+    value: form[key],
+    disabled: status === "sending",
+    "aria-invalid": Boolean(errors[key]),
+    "aria-describedby": errors[key] ? `error-${key}` : undefined,
+    onChange: (
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    ) => {
+      setForm((f) => ({ ...f, [key]: e.target.value }));
+      setErrors((v) => ({ ...v, [key]: undefined }));
+      if (status !== "sending") {
+        setStatus("idle");
+        setFeedback("");
+      }
+    },
+  });
+  const error = (key: Field) =>
+    errors[key] && (
+      <p className="field-error" id={`error-${key}`}>
+        {errors[key]}
+      </p>
+    );
   return (
-    <form className="form-wrap" onSubmit={handleSubmit} noValidate>
+    <form className="form-wrap" onSubmit={handleSubmit} noValidate aria-busy={status === "sending"}>
       <div className="form-grid">
         <div className="field">
           <label htmlFor="f-name">Nome</label>
           <input
-            id="f-name"
+            {...props("name")}
             className="input"
-            type="text"
             required
             autoComplete="name"
-            value={form.name}
-            onChange={update("name")}
+            maxLength={120}
             placeholder="Seu nome completo"
           />
+          {error("name")}
         </div>
         <div className="field">
           <label htmlFor="f-company">
             Empresa <span className="opt">(opcional)</span>
           </label>
           <input
-            id="f-company"
+            {...props("company")}
             className="input"
-            type="text"
             autoComplete="organization"
-            value={form.company}
-            onChange={update("company")}
+            maxLength={160}
             placeholder="Nome da empresa"
           />
+          {error("company")}
         </div>
         <div className="field">
           <label htmlFor="f-email">Email</label>
           <input
-            id="f-email"
+            {...props("email")}
             className="input"
-            type="email"
             required
+            type="email"
             autoComplete="email"
-            value={form.email}
-            onChange={update("email")}
+            maxLength={254}
             placeholder="voce@empresa.com"
           />
+          {error("email")}
         </div>
         <div className="field">
           <label htmlFor="f-phone">
             Telefone <span className="opt">(opcional)</span>
           </label>
           <input
-            id="f-phone"
+            {...props("phone")}
             className="input"
             type="tel"
             autoComplete="tel"
-            value={form.phone}
-            onChange={update("phone")}
+            maxLength={30}
             placeholder="(00) 00000-0000"
           />
+          {error("phone")}
         </div>
         <div className="field field--full">
           <label htmlFor="f-service">Serviço de interesse</label>
-          <select
-            id="f-service"
-            className="select"
-            value={form.service}
-            onChange={update("service")}
-          >
+          <select {...props("service")} className="select" required>
             <option value="">Selecione uma opção</option>
             {SERVICES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
+              <option key={s}>{s}</option>
             ))}
           </select>
+          {error("service")}
         </div>
         <div className="field field--full">
           <label htmlFor="f-message">Mensagem</label>
           <textarea
-            id="f-message"
+            {...props("message")}
             className="textarea"
             required
-            value={form.message}
-            onChange={update("message")}
-            placeholder="Conte um pouco sobre o seu projeto e seus objetivos."
+            minLength={20}
+            maxLength={5000}
+            placeholder="Conte sobre seu projeto e seus objetivos."
           />
+          {error("message")}
         </div>
-
-        {sent && (
-          <div className="form-ok" role="status">
-            <Check size={18} strokeWidth={2.5} />
-            <span>
-              Tudo pronto! Abrimos seu cliente de email com a solicitação. Caso não abra, escreva
-              para {EMAIL}.
-            </span>
+        {feedback && (
+          <div
+            className={status === "success" ? "form-ok" : "form-error"}
+            role={status === "success" ? "status" : "alert"}
+          >
+            {status === "success" ? <Check size={18} /> : <AlertCircle size={18} />}
+            <span>{feedback}</span>
           </div>
         )}
       </div>
-
       <div className="form-foot">
         <p className="form-note">
           Seus dados são utilizados apenas para responder a esta solicitação, conforme nossa{" "}
-          <a href="/privacy" style={{ color: "var(--orange)", textDecoration: "none" }}>
-            Política de Privacidade
-          </a>
-          .
+          <a href="/privacy">Política de Privacidade</a>.
         </p>
-        <button type="submit" className="btn btn-primary">
-          Solicitar Orçamento
-          <ArrowRight size={14} strokeWidth={2.4} />
+        <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
+          {status === "sending" ? "Enviando…" : "Solicitar Orçamento"}
+          <ArrowRight size={14} />
         </button>
       </div>
     </form>

@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "../Reveal";
-import vieira from "@/assets/solucoes-vieira.png";
+const vieira = "/images/solucoes-vieira.png";
 
 const URL = "https://solucoes-vieira-landingpage.vercel.app/";
 
