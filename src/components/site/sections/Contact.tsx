@@ -4,45 +4,42 @@ import { Reveal } from "../Reveal";
 import { EMAIL, INSTAGRAM_URL, LINKEDIN_URL, MAILTO } from "../social";
 export function Contact() {
   return (
-    <section className="section dark contact-section" id="contact" aria-labelledby="contact-title">
+    <section className="section offwhite" id="contact" aria-labelledby="contact-title">
       <div className="container contact-grid">
         <Reveal>
-          <span className="eyebrow">05 / Seu próximo movimento</span>
+          <span className="eyebrow">Vamos conversar</span>
           <h2 id="contact-title">
-            Vamos construir
-            <br />o que move
+            Seu próximo projeto
             <br />
-            <span>seu negócio.</span>
+            <span>começa aqui.</span>
           </h2>
           <p className="contact-description">
-            Conte onde sua operação trava ou o que sua marca precisa comunicar. Vamos transformar
-            esse cenário em um plano concreto.
+            Conte o que você precisa. Respondemos com os próximos passos para definir uma solução e
+            um orçamento.
           </p>
           <a className="contact-email" href={MAILTO}>
-            <Mail size={19} aria-hidden="true" />
-            {EMAIL}
-            <ArrowUpRight size={18} aria-hidden="true" />
+            <Mail size={22} aria-hidden="true" />
+            <span>{EMAIL}</span>
+            <ArrowUpRight size={20} aria-hidden="true" />
           </a>
           <div className="contact-social">
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              <Instagram size={30} aria-hidden="true" />
-              Instagram <ArrowUpRight size={20} aria-hidden="true" />
+              <Instagram size={26} aria-hidden="true" />
+              Instagram
+              <ArrowUpRight size={18} aria-hidden="true" />
             </a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
-              <Linkedin size={30} aria-hidden="true" />
-              LinkedIn <ArrowUpRight size={20} aria-hidden="true" />
+              <Linkedin size={26} aria-hidden="true" />
+              LinkedIn
+              <ArrowUpRight size={18} aria-hidden="true" />
             </a>
           </div>
-          <div className="contact-note">
-            <span className="status-dot" /> Primeiro, entendemos. Depois, propomos.
-          </div>
         </Reveal>
-        <div id="quote" className="quote-panel">
-          <div className="quote-heading">
-            <span className="eyebrow">Vamos ao seu desafio</span>
-            <h3>Solicite um diagnóstico.</h3>
-            <p>Preencha os dados e conte sobre o seu projeto.</p>
-          </div>
+        <div className="quote-panel" id="quote">
+          <header className="quote-heading">
+            <h3>Conte sobre seu projeto.</h3>
+            <p>Use uma sugestão pronta ou escreva com suas palavras.</p>
+          </header>
           <QuoteForm />
         </div>
       </div>

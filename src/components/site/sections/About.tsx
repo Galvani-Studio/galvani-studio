@@ -1,62 +1,49 @@
-import { FileCode2, LockKeyhole, Network, Fingerprint } from "lucide-react";
 import { Reveal } from "../Reveal";
-const principles = [
+const steps = [
   {
-    icon: FileCode2,
-    title: "Código que você recebe",
-    text: "Entrega do código desenvolvido, documentação e condições de propriedade registradas em contrato. Sem dependência de uma caixa-preta.",
+    number: "01",
+    title: "Entender",
+    text: "Uma conversa sobre sua empresa, seus objetivos e o que precisa ser construído.",
   },
   {
-    icon: LockKeyhole,
-    title: "Segurança definida no escopo",
-    text: "Validação de entradas, responsabilidades de acesso e integração planejada. As proteções acompanham os dados e os riscos do projeto.",
+    number: "02",
+    title: "Desenhar e desenvolver",
+    text: "Organizamos o conteúdo, definimos a experiência e transformamos o projeto em uma solução funcional.",
   },
   {
-    icon: Network,
-    title: "Arquitetura para continuar",
-    text: "Componentes reutilizáveis, fronteiras claras e integrações documentadas. Crescer não precisa significar reconstruir tudo.",
+    number: "03",
+    title: "Entregar e acompanhar",
+    text: "Validamos os detalhes, publicamos e orientamos os próximos passos conforme o escopo combinado.",
   },
 ];
 export function About() {
   return (
-    <section className="section offwhite" id="about" aria-labelledby="about-title">
-      <div className="container philosophy-grid">
+    <section className="section dark" id="about" aria-labelledby="about-title">
+      <div className="container studio-grid">
         <Reveal>
-          <span className="eyebrow">03 / Nosso padrão de trabalho</span>
+          <span className="eyebrow">O Studio</span>
           <h2 id="about-title">
-            Sua operação.
+            Bom design tem propósito.
             <br />
-            Seu código.
-            <br />
-            <span>Seu próximo passo.</span>
+            <span>Boa tecnologia também.</span>
           </h2>
-          <p className="philosophy-lead">
-            Tecnologia deve aumentar sua autonomia. Não criar uma nova dependência.
+          <p className="studio-description">
+            A Galvani Studio combina design e desenvolvimento para construir sites e sistemas que
+            sua empresa consegue usar, apresentar e evoluir.
           </p>
-          <p>
-            Desenhamos a interface e a arquitetura a partir de quem usa, quem decide e quem mantém.
-            Você participa das decisões e entende o que recebe.
-          </p>
-          <div className="philosophy-signature">
-            <Fingerprint size={32} aria-hidden="true" />
-            <span>
-              Galvani Studio
-              <br />
-              <strong>Design estratégico. Engenharia responsável.</strong>
-            </span>
-          </div>
+          <p>Um processo claro, do primeiro contato à entrega.</p>
         </Reveal>
-        <div className="principles-list">
-          {principles.map((principle) => (
-            <article key={principle.title}>
-              <principle.icon size={28} aria-hidden="true" />
+        <ol className="process-list">
+          {steps.map((step) => (
+            <li key={step.number}>
+              <span>{step.number}</span>
               <div>
-                <h3>{principle.title}</h3>
-                <p>{principle.text}</p>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
               </div>
-            </article>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

@@ -26,11 +26,11 @@ export default function Image() {
           letterSpacing: -3,
         }}
       >
-        <span>Estratégia. Design.</span>
-        <span style={{ color: "#E2E8F0" }}>Engenharia de Software.</span>
+        <span>Sites profissionais.</span>
+        <span style={{ color: "#E2E8F0" }}>Sistemas sob medida.</span>
       </div>
       <div style={{ display: "flex", fontSize: 24, color: "#C0CADA" }}>
-        Presença com propósito. Operação com autonomia.
+        Design claro. Tecnologia sólida. Galvani Studio.
       </div>
     </div>,
     size,

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Hero } from "@/components/site/sections/Hero";
-import { ExpandableServices } from "@/components/site/sections/ExpandableServices";
+import { Services } from "@/components/site/sections/Services";
 import { Portfolio } from "@/components/site/sections/Portfolio";
+import { DeliveryPipeline } from "@/components/site/DeliveryPipeline";
 import { About } from "@/components/site/sections/About";
 import { Faq } from "@/components/site/sections/Faq";
 import { Contact } from "@/components/site/sections/Contact";
@@ -14,7 +15,8 @@ export default function Home() {
       <SiteNav />
       <main id="main-content">
         <Hero />
-        <ExpandableServices />
+        <Services />
+        <DeliveryPipeline />
         <Portfolio />
         <About />
         <Faq />

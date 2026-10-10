@@ -284,7 +284,7 @@ export function QuoteForm() {
           <a href="/privacy">Política de Privacidade</a>.
         </p>
         <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
-          {status === "sending" ? "Enviando…" : "Solicitar Orçamento"}
+          {status === "sending" ? "Enviando…" : "Enviar solicitação"}
           <ArrowRight size={14} aria-hidden="true" />
         </button>
       </div>

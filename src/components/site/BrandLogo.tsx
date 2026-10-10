@@ -1,15 +1,15 @@
-const logo = "/images/logo.png";
-
+import Image from "next/image";
 export function BrandLogo({ small = false }: { small?: boolean }) {
   return (
     <>
-      <img
-        src={logo}
-        alt="Galvani Studio"
-        className={small ? "brand-mark brand-mark--sm" : "brand-mark"}
-        width={small ? 26 : 32}
-        height={small ? 26 : 32}
-      />
+      <span className="brand-mark">
+        <Image
+          src="/images/logo.png"
+          alt="Símbolo da Galvani Studio"
+          width={small ? 40 : 48}
+          height={small ? 40 : 48}
+        />
+      </span>
       <span className="brand-wm">
         <span className="brand-wm-a">GALVANI</span>
         <span className="brand-wm-b">STUDIO</span>

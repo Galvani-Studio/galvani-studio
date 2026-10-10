@@ -243,7 +243,7 @@ const SECTIONS: DocSection[] = [
       },
       {
         type: "contact",
-        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: contato@galvanistudio.com"],
+        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: galvanistudio1@gmail.com"],
       },
       {
         type: "p",

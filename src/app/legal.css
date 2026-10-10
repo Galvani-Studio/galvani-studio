@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(11, 16, 24, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
@@ -163,7 +163,7 @@
   margin: 0;
 }
 .doc-contact-box {
-  background: var(--navy);
+  background: var(--bg-2);
   padding: 28px 32px;
   border-radius: var(--r-sm);
   margin-top: 28px;
@@ -332,7 +332,7 @@
   border-radius: 5px;
 }
 .contact-box {
-  background: radial-gradient(130% 130% at 0% 0%, #18263a, var(--bg-2));
+  background: var(--bg-2);
   border-radius: var(--r-md);
   padding: 28px 30px;
   margin-top: 8px;
@@ -344,7 +344,7 @@
   margin-bottom: 6px;
 }
 .contact-box strong {
-  color: var(--white);
+  color: var(--navy);
   font-weight: 600;
 }
 .contact-box a {

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 const faqs = [
   {
@@ -25,15 +26,16 @@ const faqs = [
 ];
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
+  const reduced = useReducedMotion();
   return (
-    <section className="section dark-slate" id="faq" aria-labelledby="faq-title">
+    <section className="section light" id="faq" aria-labelledby="faq-title">
       <div className="container faq-layout">
         <header>
-          <span className="eyebrow">04 / Confiança antes do compromisso</span>
+          <span className="eyebrow">Perguntas frequentes</span>
           <h2 id="faq-title">
-            Expectativas alinhadas.
+            Antes de começar.
             <br />
-            <span>Decisões bem informadas.</span>
+            <span>Tudo com clareza.</span>
           </h2>
           <p>As respostas essenciais para começar uma parceria com clareza.</p>
         </header>
@@ -58,14 +60,18 @@ export function Faq() {
                     )}
                   </button>
                 </h3>
-                <div
+                <motion.div
+                  className="faq-panel"
+                  initial={false}
+                  animate={{ height: expanded ? "auto" : 0 }}
+                  transition={{ duration: reduced ? 0 : 0.22 }}
                   id={`faq-panel-${index}`}
                   role="region"
                   aria-labelledby={`faq-trigger-${index}`}
-                  hidden={!expanded}
+                  aria-hidden={!expanded}
                 >
                   <p>{faq.a}</p>
-                </div>
+                </motion.div>
               </article>
             );
           })}

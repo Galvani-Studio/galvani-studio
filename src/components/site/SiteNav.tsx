@@ -64,7 +64,7 @@ export function SiteNav() {
           </div>
           <div className="nav-right">
             <a href="#quote" className="btn btn-nav">
-              Iniciar Projeto <ArrowUpRight size={16} aria-hidden="true" />
+              Solicitar orçamento <ArrowUpRight size={16} aria-hidden="true" />
             </a>
             <button
               ref={toggle}
@@ -104,7 +104,7 @@ export function SiteNav() {
             </a>
           ))}
           <a href="#quote" onClick={() => setOpen(false)}>
-            Iniciar Projeto ↗
+            Solicitar orçamento ↗
           </a>
         </div>
       )}
