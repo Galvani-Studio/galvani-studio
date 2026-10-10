@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Instagram, Linkedin } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 export function SiteFooter() {
   return (
@@ -8,10 +9,24 @@ export function SiteFooter() {
           <BrandLogo />
         </a>
         <p>
-          Estratégia, design e engenharia.
+          Cada peça no lugar. Sua empresa em movimento.
           <br />
-          Seu negócio pronto para o próximo passo.
+          <a href="mailto:galvanistudio1@gmail.com">galvanistudio1@gmail.com</a>
         </p>
+        <div className="b-social">
+          <a
+            href="https://www.instagram.com/galvani_studio/"
+            aria-label="Instagram da Galvani Studio"
+          >
+            <Instagram size={22} />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/galvani-studio/"
+            aria-label="LinkedIn da Galvani Studio"
+          >
+            <Linkedin size={22} />
+          </a>
+        </div>
         <nav aria-label="Links legais">
           <Link href="/privacy">Privacidade</Link>
           <Link href="/terms">Termos de uso</Link>

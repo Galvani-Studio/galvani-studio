@@ -33,6 +33,8 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         ...parsed.data,
+        email: parsed.data.contact.includes("@") ? parsed.data.contact : parsed.data.email,
+        phone: parsed.data.contact.includes("@") ? parsed.data.phone : parsed.data.contact,
         _subject: `Galvani Studio — ${parsed.data.service} — ${parsed.data.name}`,
       }),
       signal: AbortSignal.timeout(10000),

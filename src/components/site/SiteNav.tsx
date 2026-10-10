@@ -3,10 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 const links = [
-  { href: "#portfolio", label: "Projetos" },
-  { href: "#services", label: "Soluções" },
+  { href: "#process", label: "Como funciona" },
+  { href: "#difference", label: "Por que Galvani" },
   { href: "#about", label: "O Studio" },
-  { href: "#faq", label: "FAQ" },
 ];
 export function SiteNav() {
   const [open, setOpen] = useState(false);

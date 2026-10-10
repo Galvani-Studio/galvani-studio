@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galvanistudio.com";
-const title = "Galvani Studio | Criação de Sites e Sistemas Web";
+const title = "Galvani Studio | Soluções Digitais para Empresas";
 const description =
-  "Criação de sites institucionais, landing pages e sistemas web sob medida. A Galvani Studio une design profissional, desenvolvimento React e Next.js e SEO técnico para empresas.";
+  "Criação de sites institucionais, landing pages e sistemas web sob medida. Organizamos sua presença digital com estratégia, design, velocidade e um caminho claro até o contato.";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: title, template: "%s | Galvani Studio" },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title, description, images: ["/opengraph-image"] },
 };
-export const viewport: Viewport = { themeColor: "#FFFFFF" };
+export const viewport: Viewport = { themeColor: "#090D16" };
 const organization = {
   "@context": "https://schema.org",
   "@type": ["Organization", "ProfessionalService"],
