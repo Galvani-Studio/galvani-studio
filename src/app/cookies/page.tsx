@@ -1,3 +1,8 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Política de Cookies",
+  alternates: { canonical: "/cookies" },
+};
 import { LegalDoc, type DocSection } from "@/components/site/LegalDoc";
 
 const SECTIONS: DocSection[] = [
@@ -165,7 +170,7 @@ const SECTIONS: DocSection[] = [
       { type: "p", text: "Dúvidas sobre nossa Política de Cookies? Entre em contato:" },
       {
         type: "contact",
-        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: galvanistudio1@gmail.com"],
+        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: contato@galvanistudio.com"],
       },
     ],
   },

@@ -31,6 +31,9 @@ src/components/site/
   Reveal.tsx
   SiteNav.tsx
   SiteFooter.tsx
+  Carousel.tsx
+  Stagger.tsx
+  sections/Plans.tsx
   sections/QuoteForm.tsx
 src/components/ui/
 src/lib/quote.ts
@@ -49,6 +52,8 @@ Antes de exposição pública, configure proteção contra abuso e limitação d
 
 ## Estado de validação
 
-Dependências instaladas. Typecheck aprovado, lint sem erros (8 avisos de Fast Refresh) e build de produção aprovado com Next.js 15.5.27, gerando os arquivos em `.next/`. As checagens de lint e TypeScript permanecem ativas durante o build. O schema passou em 9 cenários de dados válidos e inválidos. Preview visual permanece pendente.
+Dependências instaladas. Typecheck aprovado, lint sem erros (13 avisos de Fast Refresh) e build de produção aprovado com Next.js 15.5.27, gerando os arquivos em `.next/`. As checagens de lint e TypeScript permanecem ativas durante o build. O schema passou em 9 cenários de dados válidos e inválidos. A API compilada passou em 6 cenários: JSON inválido, validação, origem, serviço ausente, falha do serviço e recebimento confirmado (serviço simulado).
+
+O novo layout alterna seções claras e escuras, com hero 3D ilustrativo, carrosséis acessíveis, planos e FAQ. Os breakpoints implementados atendem 320px, mobile, tablet e ultrawide. A validação visual e interativa completa permanece pendente: este sandbox bloqueia sockets locais e a inicialização do Chrome (`Operation not permitted`). Não foram medidos tempos reais de carregamento; < 1s é uma meta de projeto.
 
 A árvore do plano anterior não estava disponível no contexto da execução; foi adotada a estrutura acima, mantendo os componentes existentes.

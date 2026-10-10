@@ -1,73 +1,59 @@
-"use client";
-
-import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Reveal } from "../Reveal";
-
-const FAQS = [
+const faqs = [
   {
-    q: "Quanto tempo leva um projeto?",
-    a: "Depende do escopo. Uma landing page leva entre 7 e 14 dias. Um site institucional completo pode levar de 3 a 6 semanas. Projetos mais complexos têm cronograma acordado na fase de entendimento.",
+    q: "Quais são os prazos de entrega?",
+    a: "O cronograma é definido após o diagnóstico. Como referência de planejamento, landing pages podem levar de 7 a 14 dias e sites institucionais de 3 a 6 semanas, após aprovação do escopo e recebimento dos materiais. Sistemas e projetos Enterprise recebem um roadmap por etapas. O prazo válido é o acordado na proposta.",
   },
   {
-    q: "Meu site funcionará em celulares?",
-    a: "Sim. Todos os projetos são desenvolvidos com foco em responsividade total. Testamos em celulares Android, iPhone, tablets e desktops de diferentes tamanhos para garantir uma experiência consistente.",
+    q: "A solução funciona em celulares e tablets?",
+    a: "Sim. A interface é planejada para telas móveis, tablets e desktops. Navegação, formulários e conteúdo são adaptados a cada tamanho, com validação dos principais fluxos antes da entrega.",
   },
   {
-    q: "Vocês oferecem suporte após a entrega?",
-    a: "Sim. Oferecemos planos de manutenção e evolução contínua. Após a entrega, continuamos acompanhando o projeto para garantir que ele cresça junto com o seu negócio.",
+    q: "Como funciona o suporte após a entrega?",
+    a: "O período de acompanhamento, os canais e os tempos de resposta são definidos na proposta. Manutenção e evolução podem ser contratadas conforme a necessidade da operação, com responsabilidades e escopo documentados.",
   },
   {
-    q: "Posso solicitar alterações?",
-    a: "Sim. Incluímos rodadas de revisão em todos os projetos. O número de revisões e o processo de solicitação são definidos no início de cada projeto com transparência total.",
+    q: "Posso solicitar alterações durante o projeto?",
+    a: "Sim. As etapas de aprovação e rodadas de revisão são combinadas antes do início. Demandas que ampliam o escopo recebem uma avaliação de impacto em custo e prazo, para que você decida com clareza.",
   },
   {
-    q: "Como funciona o pagamento?",
-    a: "Geralmente trabalhamos com 50% de entrada no início do projeto e 50% na entrega final. Aceitamos transferência bancária (PIX/TED) e outros meios conforme acordado. Os detalhes são sempre definidos de forma transparente antes do início.",
+    q: "Quem fica com a propriedade intelectual e o código-fonte?",
+    a: "As condições de propriedade intelectual e a entrega do código-fonte são documentadas no contrato. O código desenvolvido para o projeto é entregue conforme essas condições; bibliotecas, fontes e serviços de terceiros permanecem sujeitos às respectivas licenças. A entrega inclui as orientações acordadas para continuidade.",
   },
 ];
-
 export function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
-
   return (
-    <section className="section section--border" id="faq" aria-labelledby="faq-h">
-      <div className="faq-head">
-        <div>
-          <Reveal as="span" className="eyebrow">
-            FAQ
-          </Reveal>
-          <Reveal as="h2" className="h2" delay={1} id="faq-h">
-            Perguntas frequentes.
-          </Reveal>
-        </div>
-        <Reveal as="p" className="faq-intro" delay={2}>
-          Respondemos as dúvidas mais comuns. Se tiver alguma outra pergunta, fale conosco.
+    <section className="section light" id="faq" aria-labelledby="faq-title">
+      <div className="container faq-layout">
+        <Reveal>
+          <span className="eyebrow">05 / Antes de começar</span>
+          <h2 id="faq-title">
+            Decisões claras.
+            <br />
+            <em>Sem surpresas.</em>
+          </h2>
+          <p>
+            Uma boa parceria começa com
+            <br />
+            expectativas bem alinhadas.
+          </p>
+          <a href="#quote" className="text-link">
+            Ainda tem uma dúvida? Vamos conversar ↗
+          </a>
         </Reveal>
-      </div>
-
-      <Reveal as="div" className="faq-list" delay={2}>
-        {FAQS.map((f, i) => {
-          const isOpen = open === i;
-          return (
-            <div className={`faq-item${isOpen ? " open" : ""}`} key={f.q}>
-              <button
-                className="faq-q"
-                aria-expanded={isOpen}
-                onClick={() => setOpen(isOpen ? null : i)}
-              >
+        <div className="faq-list">
+          {faqs.map((f, i) => (
+            <details className="faq-item" key={f.q} open={i === 0 ? true : undefined}>
+              <summary>
                 {f.q}
-                <Plus className="faq-icon" size={20} strokeWidth={2} aria-hidden="true" />
-              </button>
-              <div className="faq-a">
-                <div className="faq-a-inner">
-                  <p>{f.a}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </Reveal>
+                <Plus size={20} aria-hidden="true" />
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

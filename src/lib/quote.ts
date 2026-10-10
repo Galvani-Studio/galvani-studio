@@ -6,6 +6,8 @@ export const SERVICES = [
   "Otimização de Performance",
   "Manutenção e Evolução",
   "Sistema Web / Software",
+  "Automações de Processos B2B",
+  "Personalizado / Enterprise",
   "Outro",
 ] as const;
 export const quoteSchema = z.object({

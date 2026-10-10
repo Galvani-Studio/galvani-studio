@@ -3,7 +3,7 @@
 
 export const INSTAGRAM_URL = "https://www.instagram.com/galvani_studio/";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/galvani-studio/";
-export const EMAIL = "galvanistudio1@gmail.com";
+export const EMAIL = "contato@galvanistudio.com";
 
 const SUBJECT = "Solicitação de orçamento";
 const BODY = "Olá!\n\nGostaria de solicitar um orçamento para um projeto.";

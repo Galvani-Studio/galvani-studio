@@ -1,46 +1,131 @@
+import {
+  ArrowUpRight,
+  ScanLine,
+  PenTool,
+  Code2,
+  GitBranch,
+  Globe,
+  MousePointer2,
+  RefreshCw,
+  Blocks,
+  Workflow,
+} from "lucide-react";
 import { Reveal } from "../Reveal";
-
-const STEPS = [
+import { Stagger } from "../Stagger";
+import { Carousel } from "../Carousel";
+const steps = [
   {
-    num: "01",
-    name: "Entendimento",
-    text: "Conhecemos sua empresa, seus objetivos e identificamos a melhor estratégia para o seu projeto.",
+    icon: ScanLine,
+    title: "Diagnóstico & Escopo",
+    text: "Identificamos onde a operação trava, quem usa a solução e o que precisa mudar. Escopo claro antes da primeira linha de código.",
   },
   {
-    num: "02",
-    name: "Desenvolvimento",
-    text: "Projetamos uma experiência moderna, rápida e totalmente adaptada aos seus clientes.",
+    icon: PenTool,
+    title: "Arquitetura & UI/UX",
+    text: "Organizamos informação, jornadas e interfaces para reduzir atritos. Cada decisão de design tem uma função no seu negócio.",
   },
   {
-    num: "03",
-    name: "Evolução",
-    text: "Após a entrega, continuamos acompanhando o projeto conforme o plano escolhido, garantindo melhorias contínuas e suporte quando necessário.",
+    icon: Code2,
+    title: "Engenharia de Performance",
+    text: "Next.js 15, SEO técnico e carregamento abaixo de 1s como meta, validada conforme conteúdo, dispositivo e conexão.",
+  },
+  {
+    icon: GitBranch,
+    title: "Evolução Contínua",
+    text: "Entrega documentada, suporte acordado e uma base preparada para novas integrações. Sua operação cresce sem começar do zero.",
   },
 ];
-
+const deliverables = [
+  {
+    icon: Globe,
+    title: "Sites Institucionais Corporativos",
+    text: "Autoridade digital para decisões de compra que exigem confiança.",
+  },
+  {
+    icon: MousePointer2,
+    title: "Landing Pages de Alta Conversão",
+    text: "Uma oferta clara e o caminho mais curto até o contato comercial.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Redesign e Modernização de Plataformas",
+    text: "Menos atrito, mais clareza e uma base pronta para evoluir.",
+  },
+  {
+    icon: Blocks,
+    title: "Sistemas Web & SaaS Sob Medida",
+    text: "A tecnologia se adapta à sua operação, e não o contrário.",
+  },
+  {
+    icon: Workflow,
+    title: "Automações de Processos B2B",
+    text: "Conecte ferramentas e devolva à equipe o tempo gasto em tarefas manuais.",
+  },
+];
 export function HowWeWork() {
   return (
-    <section className="section section--border" id="how" aria-labelledby="how-h">
-      <div className="how">
-        <div className="how-head">
-          <Reveal as="span" className="eyebrow">
-            Como Trabalhamos
-          </Reveal>
-          <Reveal as="h2" className="h2" delay={1} id="how-h">
-            Um processo claro,
-            <br />
-            do início ao crescimento.
-          </Reveal>
-        </div>
-        <div className="steps">
-          {STEPS.map((s, i) => (
-            <Reveal as="div" className="step" delay={(i + 1) as 1 | 2 | 3} key={s.num}>
-              <span className="step-num">{s.num}</span>
-              <h3 className="step-name">{s.name}</h3>
-              <p className="step-text">{s.text}</p>
-            </Reveal>
+    <section className="section dark-slate" id="services" aria-labelledby="process-title">
+      <div className="container">
+        <Reveal>
+          <header className="section-heading">
+            <div>
+              <span className="eyebrow">02 / Clareza do início à escala</span>
+              <h2 id="process-title">
+                Menos gargalos.
+                <br />
+                <em>Mais negócio.</em>
+              </h2>
+            </div>
+            <p>
+              Um processo visível.
+              <br />
+              Decisões que você pode acompanhar.
+            </p>
+          </header>
+        </Reveal>
+        <Stagger>
+          {steps.map((s, i) => (
+            <article className="process-step" key={s.title}>
+              <div className="process-top">
+                <span>0{i + 1}</span>
+                <s.icon size={22} />
+                <ArrowUpRight className="process-arrow" size={17} />
+              </div>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </article>
           ))}
+        </Stagger>
+        <div className="performance-strip">
+          <div>
+            <strong>SEO</strong>
+            <span>Estrutura técnica desde a origem</span>
+          </div>
+          <div>
+            <strong>&lt; 1s</strong>
+            <span>Meta de carregamento, sujeita a medição</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>Código do projeto entregue conforme contrato</span>
+          </div>
         </div>
+        <div className="deliverables-heading">
+          <span className="eyebrow">O que construímos para você</span>
+          <span>Arraste para explorar ↔</span>
+        </div>
+        <Carousel label="Entregáveis" variant="deliverables">
+          {deliverables.map((d) => (
+            <article className="deliverable-card" key={d.title}>
+              <d.icon size={24} />
+              <h3>{d.title}</h3>
+              <p>{d.text}</p>
+              <a href="#quote" className="text-link">
+                Conversar sobre esta solução <ArrowUpRight size={16} />
+              </a>
+            </article>
+          ))}
+        </Carousel>
       </div>
     </section>
   );

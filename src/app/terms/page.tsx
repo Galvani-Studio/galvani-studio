@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Termos de Uso", alternates: { canonical: "/terms" } };
 import { LegalDoc, type DocSection } from "@/components/site/LegalDoc";
 
 const SECTIONS: DocSection[] = [
@@ -193,7 +195,7 @@ const SECTIONS: DocSection[] = [
       { type: "p", text: "Para dúvidas sobre estes Termos de Uso, entre em contato:" },
       {
         type: "contact",
-        lines: ["Galvani Studio", "E-mail: galvanistudio1@gmail.com"],
+        lines: ["Galvani Studio", "E-mail: contato@galvanistudio.com"],
       },
       { type: "p", text: "Respondemos em até 5 dias úteis." },
     ],

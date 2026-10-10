@@ -1,3 +1,8 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Política de Privacidade",
+  alternates: { canonical: "/privacy" },
+};
 import { LegalDoc, type DocSection } from "@/components/site/LegalDoc";
 
 const SECTIONS: DocSection[] = [
@@ -238,7 +243,7 @@ const SECTIONS: DocSection[] = [
       },
       {
         type: "contact",
-        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: galvanistudio1@gmail.com"],
+        lines: ["Galvani Studio — Encarregado de Dados (DPO)", "E-mail: contato@galvanistudio.com"],
       },
       {
         type: "p",

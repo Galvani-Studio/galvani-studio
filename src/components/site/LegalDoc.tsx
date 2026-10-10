@@ -119,7 +119,7 @@ export function LegalDoc({
   }, [sections]);
 
   return (
-    <div className="doc">
+    <main className="doc" id="main-content">
       <nav className="doc-nav">
         <Link href="/" className="nav-logo" aria-label="Galvani Studio — início">
           <BrandLogo small />
@@ -171,6 +171,6 @@ export function LegalDoc({
           </footer>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
