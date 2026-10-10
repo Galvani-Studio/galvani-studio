@@ -9,7 +9,7 @@ export function SiteFooter() {
           <BrandLogo />
         </a>
         <p>
-          Cada peça no lugar. Sua empresa em movimento.
+          Design e desenvolvimento para empresas.
           <br />
           <a href="mailto:galvanistudio1@gmail.com">galvanistudio1@gmail.com</a>
         </p>
@@ -35,7 +35,7 @@ export function SiteFooter() {
       </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} Galvani Studio.</span>
-        <span>Presença com propósito. Operação com autonomia.</span>
+        <span>Sites institucionais, WordPress e sistemas web.</span>
       </div>
     </footer>
   );

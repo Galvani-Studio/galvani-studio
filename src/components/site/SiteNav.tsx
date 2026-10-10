@@ -1,13 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { BrandLogo } from "./BrandLogo";
 const links = [
-  { href: "#process", label: "Como funciona" },
-  { href: "#difference", label: "Por que Galvani" },
-  { href: "#about", label: "O Studio" },
+  { href: "/", label: "Início" },
+  { href: "/servicos", label: "Serviços" },
+  { href: "/portfolio", label: "Portfólio" },
+  { href: "/studio", label: "O Studio" },
+  { href: "/contato", label: "Contato" },
 ];
 export function SiteNav() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -56,13 +60,13 @@ export function SiteNav() {
           </a>
           <div className="nav-center">
             {links.map((l) => (
-              <a key={l.href} href={l.href}>
+              <a key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
                 {l.label}
               </a>
             ))}
           </div>
           <div className="nav-right">
-            <a href="#quote" className="btn btn-nav">
+            <a href="/contato#quote" className="btn btn-nav">
               Solicitar orçamento <ArrowUpRight size={16} aria-hidden="true" />
             </a>
             <button
@@ -102,7 +106,7 @@ export function SiteNav() {
               {l.label}
             </a>
           ))}
-          <a href="#quote" onClick={() => setOpen(false)}>
+          <a href="/contato#quote" onClick={() => setOpen(false)}>
             Solicitar orçamento ↗
           </a>
         </div>

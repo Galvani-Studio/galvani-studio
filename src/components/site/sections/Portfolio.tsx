@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "../Reveal";
@@ -10,9 +11,9 @@ export function Portfolio() {
             <div>
               <span className="eyebrow">Trabalhos selecionados</span>
               <h2 id="portfolio-title">
-                Presença digital.
+                Projetos realizados.
                 <br />
-                <span>Na prática.</span>
+                <span>Conheça os detalhes.</span>
               </h2>
             </div>
             <p>
@@ -54,6 +55,9 @@ export function Portfolio() {
                   </a>
                 </h3>
                 <p>Serviços técnicos apresentados com clareza e contato comercial acessível.</p>
+                <Link className="text-link" href="/portfolio/solucoes-vieira">
+                  Conhecer o projeto →
+                </Link>
               </div>
             </article>
           </Reveal>
@@ -97,6 +101,9 @@ export function Portfolio() {
                   Uma apresentação profissional para o escritório, suas áreas de atuação e seus
                   canais de atendimento.
                 </p>
+                <Link className="text-link" href="/portfolio/thais-bianca">
+                  Conhecer o projeto →
+                </Link>
               </div>
             </article>
           </Reveal>

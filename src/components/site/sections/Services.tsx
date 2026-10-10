@@ -41,7 +41,7 @@ export function Services() {
                 <s.icon size={30} aria-hidden="true" />
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
-                <a href="#quote" className="text-link">
+                <a href="/contato#quote" className="text-link">
                   Conversar sobre {s.title.toLowerCase()}{" "}
                   <ArrowUpRight size={20} aria-hidden="true" />
                 </a>

@@ -20,4 +20,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+<url><loc>https://galvanistudio.com/servicos</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://galvanistudio.com/portfolio</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://galvanistudio.com/studio</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://galvanistudio.com/contato</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://galvanistudio.com/portfolio/solucoes-vieira</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://galvanistudio.com/portfolio/thais-bianca</loc><changefreq>monthly</changefreq></url>
 </urlset>
