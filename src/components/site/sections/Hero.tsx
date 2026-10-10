@@ -14,8 +14,8 @@ export function Hero() {
               <em>Não Podem Parecer Amadoras.</em>
             </h1>
             <p className="hero-description">
-              Construímos plataformas digitais, sistemas e automações sob medida que eliminam
-              gargalos operacionais e posicionam sua marca no topo do seu setor.
+              Desenvolvemos plataformas digitais, sistemas sob medida e ecossistemas web que
+              fortalecem marcas e geram autoridade imediata.
             </p>
             <div className="hero-actions">
               <a href="#quote" className="btn btn-primary">

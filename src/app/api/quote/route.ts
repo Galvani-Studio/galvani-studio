@@ -19,30 +19,37 @@ export async function POST(request: Request) {
       { error: "Revise os campos indicados.", fields: parsed.error.flatten().fieldErrors },
       { status: 422 },
     );
-  const url = process.env.QUOTE_WEBHOOK_URL;
-  if (!url)
-    return NextResponse.json(
-      {
-        error:
-          "O envio está temporariamente indisponível. Tente novamente mais tarde ou use os contatos desta página.",
-      },
-      { status: 503 },
-    );
+  const url = process.env.QUOTE_WEBHOOK_URL || "https://formspree.io/f/xvkzrgnp";
   try {
     if (new URL(url).protocol !== "https:") throw new Error("Invalid webhook");
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         ...(process.env.QUOTE_WEBHOOK_TOKEN
           ? { Authorization: `Bearer ${process.env.QUOTE_WEBHOOK_TOKEN}` }
           : {}),
       },
-      body: JSON.stringify(parsed.data),
+      body: JSON.stringify({
+        ...parsed.data,
+        _subject: `Galvani Studio — ${parsed.data.service} — ${parsed.data.name}`,
+      }),
       signal: AbortSignal.timeout(10000),
       redirect: "error",
     });
-    if (!response.ok) throw new Error("Delivery failed");
+    if (!response.ok) {
+      const status = response.status === 429 ? 429 : 502;
+      return NextResponse.json(
+        {
+          error:
+            response.status === 429
+              ? "O serviço atingiu o limite de envios. Aguarde e tente novamente ou fale conosco pelo email de contato."
+              : "Não foi possível enviar sua solicitação. Seus dados foram preservados; tente novamente.",
+        },
+        { status },
+      );
+    }
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(

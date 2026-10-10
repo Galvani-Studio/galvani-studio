@@ -35,7 +35,6 @@ src/components/site/
   Stagger.tsx
   sections/Plans.tsx
   sections/QuoteForm.tsx
-src/components/ui/
 src/lib/quote.ts
 public/images/
 ```
@@ -44,16 +43,20 @@ Os componentes e textos existentes foram preservados na migração. O histórico
 
 ## Recebimento de orçamentos
 
-Copie `.env.example` para `.env.local` e configure `QUOTE_WEBHOOK_URL` com o endpoint HTTPS do CRM ou serviço de recebimento. Opcionalmente, configure `QUOTE_WEBHOOK_TOKEN` para autenticação Bearer. Os valores são usados apenas no servidor.
+O formulário envia para `/api/quote`, que valida os campos com Zod e encaminha os dados para `https://formspree.io/f/xvkzrgnp`. Utiliza `QUOTE_WEBHOOK_URL` quando configurado; caso contrário, mantém esse Formspree como destino padrão. `QUOTE_WEBHOOK_TOKEN` é opcional para integração com um CRM próprio. O envio usa a API JSON oficial do Formspree; o SDK React não é necessário. A tentativa de instalar o SDK neste sandbox foi bloqueada por DNS.
 
-A API valida o mesmo schema Zod do cliente e só responde com sucesso após uma resposta 2xx do serviço. Esse serviço deve persistir ou entregar a solicitação antes de confirmar o recebimento. Sem configuração, a API retorna 503 e o formulário informa indisponibilidade, preservando os campos. Não há armazenamento local de leads nem envio automático de email.
+O assunto do email inclui o serviço e o nome do cliente. O formulário oferece seis mensagens editáveis para site institucional, landing page, redesign, sistema/SaaS, automação e manutenção. Textos já digitados são preservados ao inserir uma sugestão.
 
-Antes de exposição pública, configure proteção contra abuso e limitação de requisições na infraestrutura ou no serviço de recebimento.
+O sucesso é exibido após a confirmação de recebimento pela API. Erros preservam os dados; limite de envios apresenta uma mensagem própria. O destinatário, a ativação e as regras de proteção contra abuso são gerenciados no painel do Formspree. O recebimento na caixa de email deve ser verificado com um envio real após o deploy; os testes locais usam serviço simulado.
 
 ## Estado de validação
 
-Dependências instaladas. Typecheck aprovado, lint sem erros (13 avisos de Fast Refresh) e build de produção aprovado com Next.js 15.5.27, gerando os arquivos em `.next/`. As checagens de lint e TypeScript permanecem ativas durante o build. O schema passou em 9 cenários de dados válidos e inválidos. A API compilada passou em 6 cenários: JSON inválido, validação, origem, serviço ausente, falha do serviço e recebimento confirmado (serviço simulado).
+Dependências instaladas. Typecheck aprovado, lint sem erros nem avisos e build de produção aprovado com Next.js 15.5.27, gerando os arquivos em `.next/`. As checagens de lint e TypeScript permanecem ativas durante o build. A API compilada passou em nove cenários simulados: JSON inválido, validação, origem, limite de tamanho, Formspree padrão, webhook configurável com autenticação, limite de envios, resposta de erro e falha de rede. Nenhuma mensagem real foi enviada nesses testes.
 
 O novo layout alterna seções claras e escuras, com hero 3D ilustrativo, carrosséis acessíveis, planos e FAQ. Os breakpoints implementados atendem 320px, mobile, tablet e ultrawide. A validação visual e interativa completa permanece pendente: este sandbox bloqueia sockets locais e a inicialização do Chrome (`Operation not permitted`). Não foram medidos tempos reais de carregamento; < 1s é uma meta de projeto.
 
 A árvore do plano anterior não estava disponível no contexto da execução; foi adotada a estrutura acima, mantendo os componentes existentes.
+
+## Limpeza da estrutura
+
+O App Router em `src/app/` é o único sistema de rotas. Os componentes UI genéricos, o hook mobile antigo e o utilitário de classes sem uso foram removidos. `public/`, os arquivos locais de ambiente e as configurações Next.js/PostCSS foram preservados. O ESLint reconhece os exports de metadata próprios do Next.js, mantendo as checagens ativas.

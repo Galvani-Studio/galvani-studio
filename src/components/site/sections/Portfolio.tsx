@@ -17,7 +17,7 @@ export function Portfolio() {
       url: "https://solucoes-vieira-landingpage.vercel.app/",
     },
     {
-      name: "Plataforma Galvani V2",
+      name: "Galvani Studio V2",
       tag: "TECNOLOGIA · ECOSSISTEMA WEB",
       number: "02",
       description:
@@ -37,9 +37,9 @@ export function Portfolio() {
             <div>
               <span className="eyebrow">01 / Trabalho que sai do papel</span>
               <h2 id="portfolio-title">
-                Soluções Entregues
+                Casos de Sucesso &amp;
                 <br />
-                <em>na Prática.</em>
+                <em>Projetos Entregues.</em>
               </h2>
             </div>
             <p>

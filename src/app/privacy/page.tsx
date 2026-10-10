@@ -116,7 +116,7 @@ const SECTIONS: DocSection[] = [
         type: "ul",
         items: [
           "Serviços de hospedagem e infraestrutura: provedores que mantêm nosso site em funcionamento, mediante contratos que garantem proteção adequada dos dados.",
-          "Serviços de e-mail e comunicação: plataformas utilizadas para responder solicitações e enviar informações sobre projetos.",
+          "Serviços de e-mail e comunicação: utilizamos o Formspree para receber e encaminhar solicitações de orçamento. Nome, empresa, email, telefone, serviço de interesse e mensagem informados no formulário são transmitidos a esse provedor para viabilizar o atendimento.",
           "Ferramentas de análise: podemos utilizar serviços como Google Analytics ou similares para entender o comportamento dos visitantes — sempre de forma agregada e anonimizada quando possível.",
           "Parceiros tecnológicos: prestadores de serviços essenciais ao desenvolvimento dos projetos dos clientes, vinculados por acordos de confidencialidade.",
           "Autoridades públicas: quando exigido por lei, ordem judicial ou para proteger direitos, propriedade ou segurança.",

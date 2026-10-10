@@ -26,16 +26,21 @@ const steps = [
   },
   {
     icon: Code2,
-    title: "Engenharia de Performance",
+    title: "Engenharia Next.js 15",
     text: "Next.js 15, SEO técnico e carregamento abaixo de 1s como meta, validada conforme conteúdo, dispositivo e conexão.",
   },
   {
     icon: GitBranch,
-    title: "Evolução Contínua",
+    title: "Evolução & Suporte",
     text: "Entrega documentada, suporte acordado e uma base preparada para novas integrações. Sua operação cresce sem começar do zero.",
   },
 ];
 const deliverables = [
+  {
+    icon: ScanLine,
+    title: "Performance & SEO",
+    text: "Diagnóstico de velocidade, estrutura técnica e melhorias para seu conteúdo ser encontrado.",
+  },
   {
     icon: Globe,
     title: "Sites Institucionais Corporativos",
