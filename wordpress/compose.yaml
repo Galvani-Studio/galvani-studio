@@ -1,0 +1,66 @@
+name: galvani-studio
+services:
+  database:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: galvani_studio
+      MARIADB_USER: galvani
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Configure DB_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  wordpress:
+    image: wordpress:php8.3-apache
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8085:80"
+    depends_on:
+      database:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    environment: &wordpress_environment
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_NAME: galvani_studio
+      WORDPRESS_DB_USER: galvani
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      GALVANI_API_TOKEN: ${GALVANI_API_TOKEN:?Configure GALVANI_API_TOKEN}
+      GALVANI_NOTIFY_EMAIL: ${GALVANI_NOTIFY_EMAIL:-galvanistudio1@gmail.com}
+      GALVANI_SMTP_HOST: ${GALVANI_SMTP_HOST:-mailpit}
+      GALVANI_SMTP_PORT: ${GALVANI_SMTP_PORT:-1025}
+      GALVANI_SMTP_SECURITY: ${GALVANI_SMTP_SECURITY:-none}
+      GALVANI_SMTP_USER: ${GALVANI_SMTP_USER:-}
+      GALVANI_SMTP_PASSWORD: ${GALVANI_SMTP_PASSWORD:-}
+      GALVANI_MAIL_FROM: ${GALVANI_MAIL_FROM:-galvanistudio1@gmail.com}
+    volumes: &wordpress_volumes
+      - ${WORDPRESS_ROOT:-/home/Luis77/projetos-meus/wordpress/wordpress}:/var/www/html
+      - uploads:/var/www/html/wp-content/uploads
+      - ./htaccess:/var/www/html/.htaccess:ro
+      - ./galvani-studio:/var/www/html/wp-content/themes/galvani-studio:ro
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:ro
+      - ./setup-content.php:/opt/galvani/setup-content.php:ro
+  cli:
+    image: wordpress:cli-php8.3
+    user: "33:33"
+    profiles: [tools]
+    environment:
+      <<: *wordpress_environment
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD:?Configure WP_ADMIN_PASSWORD}
+    volumes: *wordpress_volumes
+    depends_on:
+      database:
+        condition: service_healthy
+  mailpit:
+    image: axllent/mailpit:v1.29
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8025:8025"
+volumes:
+  database:
+  uploads:

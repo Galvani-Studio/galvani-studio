@@ -40,3 +40,7 @@ bun.lock
 .env*
 !.env.example
 *.tsbuildinfo
+
+# Python integration-test cache
+__pycache__/
+*.pyc

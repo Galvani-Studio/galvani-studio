@@ -6,7 +6,7 @@ $pages = array(
     'inicio' => array('Início', ''),
     'servicos' => array('Serviços', '<h2>Sites institucionais</h2><p>Apresentação da empresa, dos serviços e dos canais de atendimento. Estrutura responsiva e organização de conteúdo.</p><h2>WordPress</h2><p>Páginas e portfólio administrados pela sua equipe no painel. Identidade visual, estrutura de navegação e orientação para atualizar o conteúdo.</p><h2>Landing pages</h2><p>Páginas dedicadas a uma oferta, com informações objetivas e acesso ao contato comercial.</p><h2>Sistemas web</h2><p>Ferramentas e integrações conforme os processos da sua equipe. Funcionalidades, prazo e manutenção definidos no escopo.</p><p><a href="' . esc_url(home_url('/contato/')) . '">Conversar sobre um projeto →</a></p>'),
     'studio' => array('O Studio', '<h2>Design e desenvolvimento com acompanhamento próximo.</h2><p>A Galvani Studio constrói sites e sistemas para empresas que precisam apresentar seus serviços e organizar a operação digital.</p><h2>01. Entender</h2><p>Uma conversa sobre o negócio, os objetivos e os materiais disponíveis.</p><h2>02. Desenhar e desenvolver</h2><p>Organizamos conteúdo e navegação, definimos o visual e desenvolvemos a solução. As etapas são apresentadas para aprovação.</p><h2>03. Entregar e acompanhar</h2><p>Validamos o projeto, publicamos e orientamos sua equipe. Manutenção e evolução são acordadas na proposta.</p>'),
-    'contato' => array('Contato', '<h2>Conte sobre seu projeto.</h2><p>Informe o nome da empresa, o que deseja construir e se já possui um site ou uma instalação WordPress. Você pode incluir uma referência visual e o prazo desejado.</p><p><a href="mailto:galvanistudio1@gmail.com">Enviar mensagem: galvanistudio1@gmail.com ↗</a></p><p><a href="https://www.instagram.com/galvani_studio/">Instagram ↗</a> · <a href="https://www.linkedin.com/company/galvani-studio/">LinkedIn ↗</a></p>'),
+    'contato' => array('Contato', '[galvani_contact]<h2>Conte sobre seu projeto.</h2><p>Informe o nome da empresa, o que deseja construir e se já possui um site ou uma instalação WordPress. Você pode incluir uma referência visual e o prazo desejado.</p><p><a href="mailto:galvanistudio1@gmail.com">Enviar mensagem: galvanistudio1@gmail.com ↗</a></p><p><a href="https://www.instagram.com/galvani_studio/">Instagram ↗</a> · <a href="https://www.linkedin.com/company/galvani-studio/">LinkedIn ↗</a></p>'),
 );
 $home = 0;
 foreach ($pages as $slug => $data) {
@@ -23,9 +23,10 @@ require_once ABSPATH . 'wp-admin/includes/image.php';
 require_once ABSPATH . 'wp-admin/includes/file.php';
 require_once ABSPATH . 'wp-admin/includes/media.php';
 foreach ($projects as $slug => $data) {
-    if (get_page_by_path($slug, OBJECT, 'projeto')) { continue; }
-    $id = wp_insert_post(array('post_type'=>'projeto','post_status'=>'publish','post_name'=>$slug,'post_title'=>$data[0],'post_excerpt'=>$data[1],'post_content'=>$data[2]), true);
+    $existing = get_page_by_path($slug, OBJECT, 'projeto');
+    $id = $existing ? $existing->ID : wp_insert_post(array('post_type'=>'projeto','post_status'=>'publish','post_name'=>$slug,'post_title'=>$data[0],'post_excerpt'=>$data[1],'post_content'=>$data[2]), true);
     if (is_wp_error($id)) { WP_CLI::error($id->get_error_message()); }
+    if (has_post_thumbnail($id)) { continue; }
     $source = get_theme_file_path('/assets/' . $slug . '.png');
     $temp = wp_tempnam($source);
     if ($temp && copy($source, $temp)) {

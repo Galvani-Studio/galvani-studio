@@ -2,7 +2,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
 import { quoteSchema } from "@/lib/quote";
-const EMPTY = { name: "", company: "", contact: "", message: "" };
+const EMPTY = { name: "", company: "", contact: "", message: "", website: "" };
 type Field = keyof typeof EMPTY;
 export function QuoteForm() {
   const [form, setForm] = useState(EMPTY);
@@ -10,10 +10,12 @@ export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState("");
   const submitting = useRef(false);
+  const requestId = useRef<string | null>(null);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current) return;
-    const result = quoteSchema.safeParse(form);
+    requestId.current ??= crypto.randomUUID();
+    const result = quoteSchema.safeParse({ ...form, requestId: requestId.current });
     if (!result.success) {
       const fields: Partial<Record<Field, string>> = {};
       for (const issue of result.error.issues) fields[issue.path[0] as Field] ??= issue.message;
@@ -40,6 +42,7 @@ export function QuoteForm() {
       setStatus("success");
       setFeedback("Enviado com sucesso! Entraremos em contato pelo e-mail ou WhatsApp informado.");
       setForm(EMPTY);
+      requestId.current = null;
     } catch (e) {
       setStatus("error");
       setFeedback(
@@ -59,6 +62,7 @@ export function QuoteForm() {
     "aria-invalid": Boolean(errors[key]),
     "aria-describedby": errors[key] ? `error-${key}` : undefined,
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      requestId.current = null;
       setForm((v) => ({ ...v, [key]: e.target.value }));
       setErrors((v) => ({ ...v, [key]: undefined }));
       setStatus("idle");
@@ -73,6 +77,10 @@ export function QuoteForm() {
     );
   return (
     <form onSubmit={submit} noValidate aria-busy={status === "sending"}>
+      <div hidden>
+        <label htmlFor="f-website">Website</label>
+        <input {...field("website")} tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="form-grid">
         <div className="field">
           <label htmlFor="f-name">Nome</label>

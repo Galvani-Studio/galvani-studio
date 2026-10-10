@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import { quoteSchema } from "@/lib/quote";
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
-  if (origin && origin !== new URL(request.url).origin)
+  const requestUrl = new URL(request.url);
+  const host = request.headers.get("host");
+  if (host) requestUrl.host = host;
+  if (origin && origin !== requestUrl.origin)
     return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
   let payload: unknown;
   try {
@@ -19,23 +22,41 @@ export async function POST(request: Request) {
       { error: "Revise os campos indicados.", fields: parsed.error.flatten().fieldErrors },
       { status: 422 },
     );
-  const url = process.env.QUOTE_WEBHOOK_URL || "https://formspree.io/f/xvkzrgnp";
+  if (parsed.data.website) return NextResponse.json({ ok: true });
+  if (!parsed.data.requestId)
+    return NextResponse.json({ error: "Identificador inválido." }, { status: 422 });
+  const url = process.env.QUOTE_WEBHOOK_URL;
+  const token = process.env.QUOTE_WEBHOOK_TOKEN;
+  if (!url || !token)
+    return NextResponse.json(
+      {
+        error:
+          "O formulário está temporariamente indisponível. Fale conosco pelo e-mail de contato.",
+      },
+      { status: 503 },
+    );
   try {
-    if (new URL(url).protocol !== "https:") throw new Error("Invalid webhook");
+    const endpoint = new URL(url);
+    const local = ["localhost", "127.0.0.1", "[::1]"].includes(endpoint.hostname);
+    if (
+      endpoint.protocol !== "https:" &&
+      !(process.env.NODE_ENV !== "production" && local && endpoint.protocol === "http:")
+    )
+      throw new Error("Invalid webhook");
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        ...(process.env.QUOTE_WEBHOOK_TOKEN
-          ? { Authorization: `Bearer ${process.env.QUOTE_WEBHOOK_TOKEN}` }
-          : {}),
+        Authorization: `Bearer ${token}`,
+        "X-Galvani-Client":
+          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown",
       },
       body: JSON.stringify({
         ...parsed.data,
         email: parsed.data.contact.includes("@") ? parsed.data.contact : parsed.data.email,
         phone: parsed.data.contact.includes("@") ? parsed.data.phone : parsed.data.contact,
-        _subject: `Galvani Studio — ${parsed.data.service} — ${parsed.data.name}`,
+        requestId: parsed.data.requestId,
       }),
       signal: AbortSignal.timeout(10000),
       redirect: "error",
@@ -52,6 +73,8 @@ export async function POST(request: Request) {
         { status },
       );
     }
+    const result = await response.json();
+    if (result.ok !== true) throw new Error("Storage not confirmed");
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(

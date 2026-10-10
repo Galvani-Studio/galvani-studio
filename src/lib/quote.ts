@@ -11,6 +11,8 @@ export const SERVICES = [
   "Outro",
 ] as const;
 export const quoteSchema = z.object({
+  requestId: z.string().uuid().optional(),
+  website: z.string().max(200).default(""),
   contact: z
     .string()
     .trim()
