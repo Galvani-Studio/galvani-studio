@@ -1,57 +1,74 @@
-import { Plus } from "lucide-react";
-import { Reveal } from "../Reveal";
+"use client";
+import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
 const faqs = [
   {
-    q: "Quais são os prazos de entrega?",
-    a: "O cronograma é definido após o diagnóstico. Como referência de planejamento, landing pages podem levar de 7 a 14 dias e sites institucionais de 3 a 6 semanas, após aprovação do escopo e recebimento dos materiais. Sistemas e projetos Enterprise recebem um roadmap por etapas. O prazo válido é o acordado na proposta.",
+    q: "Como vocês definem os prazos de entrega?",
+    a: "O diagnóstico define o cronograma, as etapas de aprovação e as dependências do cliente. Landing pages, sites e sistemas têm complexidades diferentes. O prazo válido é documentado na proposta, após análise do escopo e dos materiais disponíveis.",
   },
   {
-    q: "A solução funciona em celulares e tablets?",
-    a: "Sim. A interface é planejada para telas móveis, tablets e desktops. Navegação, formulários e conteúdo são adaptados a cada tamanho, com validação dos principais fluxos antes da entrega.",
+    q: "A experiência é adaptada a celulares e tablets?",
+    a: "Sim. Conteúdo, navegação e tarefas essenciais são projetados para diferentes tamanhos de tela. A validação dos dispositivos e navegadores previstos é definida no escopo, com atenção a leitura, toque e uso por teclado.",
   },
   {
-    q: "Como funciona o suporte após a entrega?",
-    a: "O período de acompanhamento, os canais e os tempos de resposta são definidos na proposta. Manutenção e evolução podem ser contratadas conforme a necessidade da operação, com responsabilidades e escopo documentados.",
+    q: "O que acontece depois da publicação?",
+    a: "O período de acompanhamento e os canais de suporte são acordados antes do início. Manutenção corretiva, evolução e novas funcionalidades têm responsabilidades, condições e prioridades documentadas.",
   },
   {
-    q: "Posso solicitar alterações durante o projeto?",
-    a: "Sim. As etapas de aprovação e rodadas de revisão são combinadas antes do início. Demandas que ampliam o escopo recebem uma avaliação de impacto em custo e prazo, para que você decida com clareza.",
+    q: "Quem recebe o código e a propriedade do projeto?",
+    a: "O código desenvolvido para o projeto é entregue conforme o contrato, junto às orientações acordadas para continuidade. Bibliotecas, fontes e serviços de terceiros seguem suas próprias licenças. A proposta explicita as condições de propriedade intelectual.",
   },
   {
-    q: "Quem fica com a propriedade intelectual e o código-fonte?",
-    a: "As condições de propriedade intelectual e a entrega do código-fonte são documentadas no contrato. O código desenvolvido para o projeto é entregue conforme essas condições; bibliotecas, fontes e serviços de terceiros permanecem sujeitos às respectivas licenças. A entrega inclui as orientações acordadas para continuidade.",
+    q: "Como são tratadas mudanças no escopo?",
+    a: "Cada etapa tem critérios de aprovação. Uma nova necessidade recebe avaliação de prazo, custo e impacto antes de implementação. Você decide com clareza, sem ampliar o projeto de forma silenciosa.",
   },
 ];
 export function Faq() {
+  const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="section light" id="faq" aria-labelledby="faq-title">
+    <section className="section dark-slate" id="faq" aria-labelledby="faq-title">
       <div className="container faq-layout">
-        <Reveal>
-          <span className="eyebrow">05 / Antes de começar</span>
+        <header>
+          <span className="eyebrow">04 / Confiança antes do compromisso</span>
           <h2 id="faq-title">
-            Decisões claras.
+            Expectativas alinhadas.
             <br />
-            <em>Sem surpresas.</em>
+            <span>Decisões bem informadas.</span>
           </h2>
-          <p>
-            Uma boa parceria começa com
-            <br />
-            expectativas bem alinhadas.
-          </p>
-          <a href="#quote" className="text-link">
-            Ainda tem uma dúvida? Vamos conversar ↗
-          </a>
-        </Reveal>
+          <p>As respostas essenciais para começar uma parceria com clareza.</p>
+        </header>
         <div className="faq-list">
-          {faqs.map((f, i) => (
-            <details className="faq-item" key={f.q} open={i === 0 ? true : undefined}>
-              <summary>
-                {f.q}
-                <Plus size={20} aria-hidden="true" />
-              </summary>
-              <p>{f.a}</p>
-            </details>
-          ))}
+          {faqs.map((faq, index) => {
+            const expanded = open === index;
+            return (
+              <article className="faq-item" key={faq.q}>
+                <h3>
+                  <button
+                    id={`faq-trigger-${index}`}
+                    aria-expanded={expanded}
+                    aria-controls={`faq-panel-${index}`}
+                    onClick={() => setOpen(expanded ? null : index)}
+                    className="faq-trigger"
+                  >
+                    {faq.q}
+                    {expanded ? (
+                      <Minus size={24} aria-hidden="true" />
+                    ) : (
+                      <Plus size={24} aria-hidden="true" />
+                    )}
+                  </button>
+                </h3>
+                <div
+                  id={`faq-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-trigger-${index}`}
+                  hidden={!expanded}
+                >
+                  <p>{faq.a}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

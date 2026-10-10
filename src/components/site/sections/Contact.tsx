@@ -7,30 +7,30 @@ export function Contact() {
     <section className="section dark contact-section" id="contact" aria-labelledby="contact-title">
       <div className="container contact-grid">
         <Reveal>
-          <span className="eyebrow">06 / Seu próximo movimento</span>
+          <span className="eyebrow">05 / Seu próximo movimento</span>
           <h2 id="contact-title">
             Vamos construir
             <br />o que move
             <br />
-            <em>seu negócio.</em>
+            <span>seu negócio.</span>
           </h2>
           <p className="contact-description">
             Conte onde sua operação trava ou o que sua marca precisa comunicar. Vamos transformar
             esse cenário em um plano concreto.
           </p>
           <a className="contact-email" href={MAILTO}>
-            <Mail size={19} />
+            <Mail size={19} aria-hidden="true" />
             {EMAIL}
-            <ArrowUpRight size={18} />
+            <ArrowUpRight size={18} aria-hidden="true" />
           </a>
           <div className="contact-social">
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              <Instagram size={17} />
-              Instagram <ArrowUpRight size={14} />
+              <Instagram size={30} aria-hidden="true" />
+              Instagram <ArrowUpRight size={20} aria-hidden="true" />
             </a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
-              <Linkedin size={17} />
-              LinkedIn <ArrowUpRight size={14} />
+              <Linkedin size={30} aria-hidden="true" />
+              LinkedIn <ArrowUpRight size={20} aria-hidden="true" />
             </a>
           </div>
           <div className="contact-note">

@@ -117,6 +117,14 @@ export function QuoteForm() {
   const props = (key: Field) => ({
     id: `f-${key}`,
     name: key,
+    "aria-label": {
+      name: "Nome completo",
+      company: "Empresa (opcional)",
+      email: "Email para contato",
+      phone: "Telefone com DDD (opcional)",
+      service: "Serviço de interesse",
+      message: "Mensagem sobre o projeto",
+    }[key],
     value: form[key],
     disabled: status === "sending",
     "aria-invalid": Boolean(errors[key]),
@@ -261,7 +269,11 @@ export function QuoteForm() {
             className={status === "success" ? "form-ok" : "form-error"}
             role={status === "success" ? "status" : "alert"}
           >
-            {status === "success" ? <Check size={18} /> : <AlertCircle size={18} />}
+            {status === "success" ? (
+              <Check size={18} aria-hidden="true" />
+            ) : (
+              <AlertCircle size={18} aria-hidden="true" />
+            )}
             <span>{feedback}</span>
           </div>
         )}
@@ -273,7 +285,7 @@ export function QuoteForm() {
         </p>
         <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
           {status === "sending" ? "Enviando…" : "Solicitar Orçamento"}
-          <ArrowRight size={14} />
+          <ArrowRight size={14} aria-hidden="true" />
         </button>
       </div>
     </form>

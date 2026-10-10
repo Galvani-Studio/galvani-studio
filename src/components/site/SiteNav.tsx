@@ -6,7 +6,6 @@ const links = [
   { href: "#portfolio", label: "Projetos" },
   { href: "#services", label: "Soluções" },
   { href: "#about", label: "O Studio" },
-  { href: "#plans", label: "Planos" },
   { href: "#faq", label: "FAQ" },
 ];
 export function SiteNav() {
@@ -65,7 +64,7 @@ export function SiteNav() {
           </div>
           <div className="nav-right">
             <a href="#quote" className="btn btn-nav">
-              Iniciar Projeto <ArrowUpRight size={16} />
+              Iniciar Projeto <ArrowUpRight size={16} aria-hidden="true" />
             </a>
             <button
               ref={toggle}
@@ -75,7 +74,7 @@ export function SiteNav() {
               aria-controls={open ? "mobile-menu" : undefined}
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? <X /> : <Menu />}
+              {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -97,7 +96,7 @@ export function SiteNav() {
               toggle.current?.focus();
             }}
           >
-            <X />
+            <X aria-hidden="true" />
           </button>
           {links.map((l) => (
             <a key={l.href} href={l.href} onClick={() => setOpen(false)}>

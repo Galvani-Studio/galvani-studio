@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#090D16" };
 const organization = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "ProfessionalService"],
   name: "Galvani Studio",
   url: siteUrl,
   logo: new URL("/images/logo.png", siteUrl).href,

@@ -35,7 +35,7 @@
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--text);
   margin-bottom: 18px;
 }
 .doc-title {
@@ -95,7 +95,7 @@
 }
 .index-list a:hover {
   color: var(--navy);
-  border-left-color: var(--orange);
+  border-left-color: var(--text);
 }
 .doc-content {
   display: flex;
@@ -147,12 +147,12 @@
   top: 10px;
   width: 5px;
   height: 5px;
-  background: var(--orange);
+  background: var(--support);
   border-radius: 50%;
 }
 .doc-highlight {
   background: rgba(13, 31, 60, 0.04);
-  border-left: 3px solid var(--orange);
+  border-left: 3px solid var(--support);
   padding: 20px 24px;
   margin: 24px 0;
 }
@@ -171,14 +171,14 @@
 .doc-contact-box p {
   font-size: 14px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--support);
   margin-bottom: 8px;
 }
 .doc-contact-box p:last-child {
   margin-bottom: 0;
 }
 .doc-contact-box a {
-  color: var(--orange);
+  color: var(--text);
   text-decoration: none;
   font-weight: 500;
 }
@@ -210,7 +210,7 @@
 .highlight-box {
   background: var(--bg-2);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--orange);
+  border-left: 3px solid var(--support);
   border-radius: var(--r-md);
   padding: 24px 28px;
   margin-bottom: 48px;
@@ -271,10 +271,10 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--orange);
+  background: var(--support);
 }
 .doc-link {
-  color: var(--orange);
+  color: var(--text);
   text-decoration: none;
   font-weight: 500;
 }
@@ -294,8 +294,8 @@
   color: var(--navy);
 }
 .tag-optional {
-  background: rgba(211, 172, 112, 0.12);
-  color: #c4501a;
+  background: #ffffff08;
+  color: var(--text);
 }
 .cookie-table {
   width: 100%;
@@ -340,7 +340,7 @@
 .contact-box p {
   font-size: 14px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.66);
+  color: var(--support);
   margin-bottom: 6px;
 }
 .contact-box strong {
@@ -348,7 +348,7 @@
   font-weight: 600;
 }
 .contact-box a {
-  color: var(--orange);
+  color: var(--text);
   text-decoration: none;
 }
 

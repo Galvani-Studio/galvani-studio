@@ -125,7 +125,7 @@ export function LegalDoc({
           <BrandLogo small />
         </Link>
         <Link href="/" className="doc-back">
-          <ArrowLeft size={14} strokeWidth={2} />
+          <ArrowLeft size={14} strokeWidth={2} aria-hidden="true" />
           Voltar ao site
         </Link>
       </nav>

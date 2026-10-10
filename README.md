@@ -31,9 +31,8 @@ src/components/site/
   Reveal.tsx
   SiteNav.tsx
   SiteFooter.tsx
-  Carousel.tsx
-  Stagger.tsx
-  sections/Plans.tsx
+  CodeInterface.tsx
+  sections/ExpandableServices.tsx
   sections/QuoteForm.tsx
 src/lib/quote.ts
 public/images/
@@ -53,10 +52,12 @@ O sucesso é exibido após a confirmação de recebimento pela API. Erros preser
 
 Dependências instaladas. Typecheck aprovado, lint sem erros nem avisos e build de produção aprovado com Next.js 15.5.27, gerando os arquivos em `.next/`. As checagens de lint e TypeScript permanecem ativas durante o build. A API compilada passou em nove cenários simulados: JSON inválido, validação, origem, limite de tamanho, Formspree padrão, webhook configurável com autenticação, limite de envios, resposta de erro e falha de rede. Nenhuma mensagem real foi enviada nesses testes.
 
-O novo layout alterna seções claras e escuras, com hero 3D ilustrativo, carrosséis acessíveis, planos e FAQ. Os breakpoints implementados atendem 320px, mobile, tablet e ultrawide. A validação visual e interativa completa permanece pendente: este sandbox bloqueia sockets locais e a inicialização do Chrome (`Operation not permitted`). Não foram medidos tempos reais de carregamento; < 1s é uma meta de projeto.
+O layout alterna seções claras e escuras, com hero de código 3D ilustrativo, cinco serviços expansíveis e FAQ com controles ARIA. Carrosséis, cards de planos e componentes de processo anteriores foram removidos. Os breakpoints implementados atendem 320px, mobile, tablet e ultrawide. A validação visual e interativa completa permanece pendente: este sandbox bloqueia sockets locais e a inicialização do Chrome (`Operation not permitted`). Não foram medidos tempos reais de carregamento ou resultados comerciais dos cases. Os indicadores apresentados descrevem a implementação, sem inventar ganhos de receita ou conversão.
 
-A árvore do plano anterior não estava disponível no contexto da execução; foi adotada a estrutura acima, mantendo os componentes existentes.
+A hierarquia de títulos, os IDs, as referências ARIA, os textos alternativos e os metadados foram verificados no HTML do build. Treze pares de texto/fundo foram medidos; todos superaram 4,5:1 e o menor contraste foi 6,51:1. Isso não substitui uma auditoria completa de WCAG com navegador e tecnologias assistivas.
+
+Os serviços respondem a clique, hover de mouse e teclas de direção/Home/End. Painéis recolhidos permanecem fora da navegação de foco. As animações respeitam movimento reduzido; o movimento automático da grade termina em quatro segundos.
 
 ## Limpeza da estrutura
 
-O App Router em `src/app/` é o único sistema de rotas. Os componentes UI genéricos, o hook mobile antigo e o utilitário de classes sem uso foram removidos. `public/`, os arquivos locais de ambiente e as configurações Next.js/PostCSS foram preservados. O ESLint reconhece os exports de metadata próprios do Next.js, mantendo as checagens ativas.
+O App Router em `src/app/` é o único sistema de rotas. Os componentes UI genéricos, o hook mobile antigo e o utilitário de classes sem uso foram removidos. Os ativos oficiais de marca em `public/images/`, os arquivos locais de ambiente e as configurações Next.js/PostCSS foram preservados. Robots e sitemap foram alinhados ao domínio `https://galvanistudio.com` usado nos metadados. O ESLint reconhece os exports de metadata próprios do Next.js, mantendo as checagens ativas.

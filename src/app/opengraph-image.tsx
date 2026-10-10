@@ -27,9 +27,9 @@ export default function Image() {
         }}
       >
         <span>Estratégia. Design.</span>
-        <span style={{ color: "#FF6B00" }}>Engenharia de Software.</span>
+        <span style={{ color: "#E2E8F0" }}>Engenharia de Software.</span>
       </div>
-      <div style={{ display: "flex", fontSize: 24, color: "#A4B0C3" }}>
+      <div style={{ display: "flex", fontSize: 24, color: "#C0CADA" }}>
         Presença com propósito. Operação com autonomia.
       </div>
     </div>,
